@@ -46,7 +46,7 @@ export const Next = styled.div`
 `;
 
 export const Level = styled.div`
-  color: #E9EDEA;
+  color: #e9edea;
   font-weight: bold;
 `;
 
@@ -58,6 +58,11 @@ export const Start = styled.button`
   border-radius: 5px;
   background-color: #52ffb8;
   font-weight: bold;
+  outline: none;
+
+  &:hover {
+    background-color: #00e083;
+  }
 `;
 
 export const Reset = styled.button`
@@ -68,4 +73,9 @@ export const Reset = styled.button`
   border-radius: 5px;
   background-color: #fe4a49;
   font-weight: bold;
+  outline: none;
+
+  &:hover {
+    background-color: #DF0101;
+  }
 `;
