@@ -6,6 +6,7 @@ import {
   TetrisWrapper,
   TetrisGrid,
   Cell,
+  LeftPanel,
   RightPanel,
   Start,
   Reset,
@@ -17,6 +18,7 @@ const Tetris = () => {
 
   return (
     <TetrisWrapper>
+      <LeftPanel></LeftPanel>
       <TetrisGrid>{cells.map(row => row.map(cell => <Cell />))}</TetrisGrid>
       <RightPanel>
         <Level>Level:</Level>
