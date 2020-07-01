@@ -1,29 +1,44 @@
 import React, { useState } from 'react';
-import { buildTetrisGrid } from './Utils/gameUtils';
+import { BuildTetrisGrid, GetRandomTetromino } from './Utils/GameUtils';
+import Block from './Block';
 
 // Styled components
 import {
   TetrisWrapper,
   TetrisGrid,
-  Cell,
   LeftPanel,
+  Hold,
   RightPanel,
   Start,
   Reset,
-  Level
+  Next,
+  Level,
+  Score,
+  ButtonsContainer
 } from './styles/StyledTetris';
 
 const Tetris = () => {
-  const [cells, setCells] = useState(buildTetrisGrid());
+  const [blocks, setBlocks] = useState(BuildTetrisGrid());
+  const [tetromino, setTetromino] = useState(GetRandomTetromino());
+
+  const startButtonClickedHandler = () => {
+    alert(tetromino);
+  };
 
   return (
     <TetrisWrapper>
-      <LeftPanel></LeftPanel>
-      <TetrisGrid>{cells.map(row => row.map(cell => <Cell />))}</TetrisGrid>
+      <LeftPanel>
+        <Hold>Hold</Hold>
+      </LeftPanel>
+      <TetrisGrid>{blocks.map(row => row.map(block => <Block />))}</TetrisGrid>
       <RightPanel>
-        <Level>Level:</Level>
-        <Start>Start</Start>
-        <Reset>Reset</Reset>
+        <Next>Next</Next>
+        <Level>Level</Level>
+        <Score>Score</Score>
+        <ButtonsContainer>
+          <Start onClick={startButtonClickedHandler}>Start</Start>
+          <Reset>Reset</Reset>
+        </ButtonsContainer>
       </RightPanel>
     </TetrisWrapper>
   );
