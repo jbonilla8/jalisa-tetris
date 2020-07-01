@@ -29,10 +29,10 @@ const Tetris = () => {
     <TetrisWrapper>
       <LeftPanel>
         <Held>Held</Held>
+        <Next>Next</Next>
       </LeftPanel>
       <TetrisGrid>{blocks.map(row => row.map(block => <Block />))}</TetrisGrid>
       <RightPanel>
-        <Next>Next</Next>
         <Level>Level</Level>
         <Score>Score</Score>
         <ButtonsContainer>

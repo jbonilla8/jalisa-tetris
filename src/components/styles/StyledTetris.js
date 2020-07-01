@@ -22,7 +22,7 @@ export const TetrisGrid = styled.div`
 export const LeftPanel = styled.div`
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: repeat(4, auto);
+  grid-template-rows: repeat(3, 33.33%);
   background-color: rgba(59, 60, 84, 0.8);
   width: 210px;
   height: 100vh;
@@ -32,12 +32,18 @@ export const LeftPanel = styled.div`
 
 export const Held = styled.div`
   font-weight: bold;
+  grid-row: 1/2;
+`;
+
+export const Next = styled.div`
+  font-weight: bold;
+  grid-row: 2/3;
 `;
 
 export const RightPanel = styled.div`
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: repeat(4, auto);
+  grid-template-rows: repeat(3, 33.33%);
   background-color: rgba(59, 60, 84, 0.8);
   width: 210px;
   height: 100vh;
@@ -45,23 +51,18 @@ export const RightPanel = styled.div`
   align-items: center;
 `;
 
-export const Next = styled.div`
+export const Level = styled.div`
   font-weight: bold;
   grid-row: 1/2;
 `;
 
-export const Level = styled.div`
+export const Score = styled.div`
   font-weight: bold;
   grid-row: 2/3;
 `;
 
-export const Score = styled.div`
-  font-weight: bold;
-  grid-row: 3/4;
-`;
-
 export const ButtonsContainer = styled.div`
-  grid-row: 4/5;
+  grid-row: 3/4;
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto auto;
