@@ -7,7 +7,7 @@ import {
   TetrisWrapper,
   TetrisGrid,
   LeftPanel,
-  Hold,
+  Held,
   RightPanel,
   Start,
   Reset,
@@ -28,7 +28,7 @@ const Tetris = () => {
   return (
     <TetrisWrapper>
       <LeftPanel>
-        <Hold>Hold</Hold>
+        <Held>Held</Held>
       </LeftPanel>
       <TetrisGrid>{blocks.map(row => row.map(block => <Block />))}</TetrisGrid>
       <RightPanel>

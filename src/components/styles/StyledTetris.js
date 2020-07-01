@@ -30,7 +30,7 @@ export const LeftPanel = styled.div`
   align-items: center;
 `;
 
-export const Hold = styled.div`
+export const Held = styled.div`
   font-weight: bold;
 `;
 
