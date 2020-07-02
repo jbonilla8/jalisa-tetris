@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BuildTetrisGrid, GetRandomTetromino } from './Utils/GameUtils';
 import Block from './Block';
 
@@ -18,11 +18,19 @@ import {
 } from './styles/StyledTetris';
 
 const Tetris = () => {
-  const [blocks, setBlocks] = useState(BuildTetrisGrid());
-  const [tetromino, setTetromino] = useState(GetRandomTetromino());
+  const [grid, setGrid] = useState(BuildTetrisGrid());
+  const [tetromino, setTetromino] = useState(null);
+
+  useEffect(() => {
+    console.log(tetromino);
+  });
 
   const startButtonClickedHandler = () => {
-    alert(tetromino);
+    setTetromino(GetRandomTetromino());
+  };
+
+  const resetButtonClickedHandler = () => {
+    setTetromino(null);
   };
 
   return (
@@ -31,13 +39,13 @@ const Tetris = () => {
         <Held>Held</Held>
         <Next>Next</Next>
       </LeftPanel>
-      <TetrisGrid>{blocks.map(row => row.map(block => <Block />))}</TetrisGrid>
+      <TetrisGrid>{grid.map(row => row.map(block => <Block />))}</TetrisGrid>
       <RightPanel>
         <Level>Level</Level>
         <Score>Score</Score>
         <ButtonsContainer>
           <Start onClick={startButtonClickedHandler}>Start</Start>
-          <Reset>Reset</Reset>
+          <Reset onClick={resetButtonClickedHandler}>Reset</Reset>
         </ButtonsContainer>
       </RightPanel>
     </TetrisWrapper>

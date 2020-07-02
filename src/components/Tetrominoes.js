@@ -1,7 +1,5 @@
-import React from 'react';
-
-export const Tetrominoes = {
-  0: { shape: [[0]], color: 'black' },
+export const TETROMINOES = {
+  // 0: { shape: [[0]], color: '#272838' },
   T: {
     shape: [[1, 1, 1], [0, 1, 0], [0, 0, 0]],
     color: 'red'

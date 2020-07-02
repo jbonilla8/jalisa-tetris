@@ -1,4 +1,4 @@
-import { Tetrominoes } from '../Tetrominoes';
+import { TETROMINOES } from '../Tetrominoes';
 
 export const BuildTetrisGrid = () => {
   const blocks = [];
@@ -25,6 +25,6 @@ export const Key = {
 export const GetRandomTetromino = () => {
   const tetromino = 'IJLOSTZ';
   const randTetromino = tetromino[Math.floor(Math.random() * tetromino.length)];
-  const result = JSON.stringify(Tetrominoes[randTetromino]);
+  const result = TETROMINOES[randTetromino];
   return result;
 };
