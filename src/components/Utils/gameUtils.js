@@ -5,10 +5,10 @@ export const BuildTetrisGrid = () => {
   const gridWidth = 10;
   const gridHeight = 20;
 
-  for (let x = 0; x < gridWidth; x++) {
+  for (let y = 0; y < gridHeight; y++) {
     const row = [];
-    for (let y = 0; y < gridHeight; y++) {
-      row.push({ x, y });
+    for (let x = 0; x < gridWidth; x++) {
+      row.push({ x, y, blockColor: null});
     }
     blocks.push(row);
   }

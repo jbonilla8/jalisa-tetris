@@ -1,31 +1,31 @@
 export const TETROMINOES = {
-  // 0: { shape: [[0]], color: '#272838' },
+  // 0: { shape: [[0]], blockColor: '#272838' },
   T: {
     shape: [[1, 1, 1], [0, 1, 0], [0, 0, 0]],
-    color: 'red'
+    blockColor: 'red'
   },
   Z: {
     shape: [[0, 0, 0], [2, 2, 0], [0, 2, 2]],
-    color: 'blue'
+    blockColor: 'blue'
   },
   S: {
     shape: [[0, 0, 0], [0, 3, 3], [3, 3, 0]],
-    color: 'purple'
+    blockColor: 'purple'
   },
   O: {
     shape: [[4, 4], [4, 4]],
-    color: 'yellow'
+    blockColor: 'yellow'
   },
   L: {
     shape: [[0, 5, 0], [0, 5, 0], [0, 5, 5]],
-    color: 'lime'
+    blockColor: 'lime'
   },
   J: {
     shape: [[0, 6, 0], [0, 6, 0], [6, 6, 0]],
-    color: 'orange'
+    blockColor: 'orange'
   },
   I: {
     shape: [[0, 7, 0, 0], [0, 7, 0, 0], [0, 7, 0, 0], [0, 7, 0, 0]],
-    color: 'cyan'
+    blockColor: 'cyan'
   }
 };
