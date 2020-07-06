@@ -20,6 +20,7 @@ import {
 const Tetris = () => {
   const [grid, setGrid] = useState([]);
   const [tetromino, setTetromino] = useState(null);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   useEffect(() => {
     console.log(tetromino);
@@ -31,16 +32,16 @@ const Tetris = () => {
     const { shape, blockColor } = tetromino;
     for (let y = 0; y < shape.length; y++) {
       for (let x = 0; x < shape[0].length; x++) {
-
-        const blockToStyle = grid[x][y+4];
+        const blockToStyle = grid[x][y + 4];
         blockToStyle.controlled = true;
 
-        if(shape[x][y] > 0){
+        if (shape[x][y] > 0) {
           blockToStyle.blockColor = blockColor;
         }
       }
     }
     setGrid([...grid]);
+    setButtonDisabled(true);
   };
 
   const resetButtonClickedHandler = () => {
@@ -61,7 +62,9 @@ const Tetris = () => {
         <Level>Level</Level>
         <Score>Score</Score>
         <ButtonsContainer>
-          <Start onClick={startButtonClickedHandler}>Start</Start>
+          <Start onClick={startButtonClickedHandler} disabled={buttonDisabled}>
+            Start
+          </Start>
           <Reset onClick={resetButtonClickedHandler}>Reset</Reset>
         </ButtonsContainer>
       </RightPanel>
