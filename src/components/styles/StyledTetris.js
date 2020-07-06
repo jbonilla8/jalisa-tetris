@@ -74,14 +74,14 @@ export const Start = styled.button`
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  background-color: #52ffb8;
+  background-color: ${props => props.disabled ? 'gray' : '#52ffb8'};
   font-weight: bold;
   outline: none;
   grid-row: 1/2;
   margin-bottom: 1rem;
 
   &:hover {
-    background-color: #00e083;
+    background-color: ${props => props.disabled ? 'gray' : '#00e083'};
   }
 `;
 
