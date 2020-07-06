@@ -1,5 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { BuildTetrisGrid, GetRandomTetromino } from './Utils/GameUtils';
+import {
+  BuildTetrisGrid,
+  GetRandomTetromino,
+  DrawRandomTetromino
+} from './Utils/GameUtils';
 import Block from './Block';
 
 // Styled components
@@ -29,17 +33,7 @@ const Tetris = () => {
 
   const startButtonClickedHandler = () => {
     const tetromino = GetRandomTetromino();
-    const { shape, blockColor } = tetromino;
-    for (let y = 0; y < shape.length; y++) {
-      for (let x = 0; x < shape[0].length; x++) {
-        const blockToStyle = grid[x][y + 4];
-        blockToStyle.controlled = true;
-
-        if (shape[x][y] > 0) {
-          blockToStyle.blockColor = blockColor;
-        }
-      }
-    }
+    DrawRandomTetromino(tetromino, grid);
     setGrid([...grid]);
     setButtonDisabled(true);
   };

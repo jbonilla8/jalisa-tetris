@@ -8,7 +8,7 @@ export const BuildTetrisGrid = () => {
   for (let y = 0; y < gridHeight; y++) {
     const row = [];
     for (let x = 0; x < gridWidth; x++) {
-      row.push({ x, y, blockColor: null});
+      row.push({ x, y, blockColor: null });
     }
     blocks.push(row);
   }
@@ -27,4 +27,18 @@ export const GetRandomTetromino = () => {
   const randTetromino = tetromino[Math.floor(Math.random() * tetromino.length)];
   const result = TETROMINOES[randTetromino];
   return result;
+};
+
+export const DrawRandomTetromino = (tetromino, grid) => {
+  const { shape, blockColor } = tetromino;
+  for (let y = 0; y < shape.length; y++) {
+    for (let x = 0; x < shape[0].length; x++) {
+      const blockToStyle = grid[x][y + 4];
+      blockToStyle.controlled = true;
+
+      if (shape[x][y] > 0) {
+        blockToStyle.blockColor = blockColor;
+      }
+    }
+  }
 };
