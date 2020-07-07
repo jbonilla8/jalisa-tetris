@@ -25,7 +25,6 @@ import {
 const Tetris = () => {
   const [grid, setGrid] = useState([]);
   const tetrominoRef = useRef(null);
-  //const [tetromino, setTetromino] = useState(tetrominoRef.current);
   const [startButtonDisabled, setStartButtonDisabled] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [resetButtonDisabled, setResetButtonDisabled] = useState(false);
@@ -42,7 +41,6 @@ const Tetris = () => {
     tetrominoRef.current = GetRandomTetromino();
     DrawTetromino(tetrominoRef.current, grid);
     setGrid([...grid]);
-    //setTetromino(tetrominoRef.current);
     setStartButtonDisabled(true);
     setResetButtonDisabled(false);
     setIsGameStarted(true);
@@ -53,7 +51,6 @@ const Tetris = () => {
       const interval = setInterval(() => {
         tetrominoRef.current.y += 1;
         DrawTetromino(tetrominoRef.current, grid);
-        //setTetromino(tetrominoRef.current);
         setGrid([...grid]);
         console.log(tetrominoRef.current);
       }, 1000);
@@ -67,7 +64,6 @@ const Tetris = () => {
     setIsGameStarted(false);
     setStartButtonDisabled(false);
     setResetButtonDisabled(true);
-    //setTetromino(tetrominoRef.current);
     setGrid([...grid]);
     // fix bug where not resetting 2nd time around
   };
@@ -97,7 +93,6 @@ const Tetris = () => {
         // spacebar moves tetromino to bottom immediately
       }
       DrawTetromino(tetrominoRef.current, grid);
-      //setTetromino(tetrominoRef.current);
       setGrid([...grid]);
     }
   };
