@@ -77,19 +77,22 @@ const Tetris = () => {
     }
   }
 
+  const RotateTetromino = tetrominoRef => {};
+
   const MoveTetromino = ({ keyCode }) => {
     if (isGameStarted) {
       if (keyCode === 37) {
         tetrominoRef.current.x -= 1;
-      } else if (keyCode === 38) {
-        // rotate tetromino
-        alert('up');
+      } else if (keyCode === 38 || keyCode === 88) {
+        alert('rotate clockwise');
+      } else if (keyCode === 18 || keyCode === 90) {
+        alert('rotate counter-clockwise');
       } else if (keyCode === 39) {
         tetrominoRef.current.x += 1;
       } else if (keyCode === 40) {
         tetrominoRef.current.y += 1;
       } else if (keyCode === 32) {
-        // spacebar moves tetromino to bottom immediately
+        alert('hard drop');
       }
       DrawTetromino(tetrominoRef.current, grid);
       setGrid([...grid]);
