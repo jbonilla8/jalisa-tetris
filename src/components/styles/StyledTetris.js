@@ -28,16 +28,19 @@ export const LeftPanel = styled.div`
   height: 100vh;
   justify-items: center;
   align-items: center;
+  font-weight: bold;
 `;
 
 export const Held = styled.div`
-  font-weight: bold;
   grid-row: 1/2;
 `;
 
 export const Next = styled.div`
-  font-weight: bold;
   grid-row: 2/3;
+`;
+
+export const Time = styled.div`
+  grid-row: 3/4;
 `;
 
 export const RightPanel = styled.div`
