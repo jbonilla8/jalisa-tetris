@@ -87,8 +87,7 @@ const Tetris = () => {
       } else if (keyCode === 39) {
         tetrominoRef.current.x += 1;
       } else if (keyCode === 40) {
-        // move tetromino down
-        alert('down');
+        tetrominoRef.current.y += 1;
       } else if (keyCode === 32) {
         // spacebar moves tetromino to bottom immediately
       }
