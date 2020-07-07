@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   BuildTetrisGrid,
   GetRandomTetromino,
@@ -24,24 +24,25 @@ import {
 
 const Tetris = () => {
   const [grid, setGrid] = useState([]);
-  const [tetromino, setTetromino] = useState(null);
+  const tetrominoRef = useRef(null);
+  //const [tetromino, setTetromino] = useState(tetrominoRef.current);
   const [startButtonDisabled, setStartButtonDisabled] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [resetButtonDisabled, setResetButtonDisabled] = useState(false);
   const [reset, setReset] = useState(false);
 
   useEffect(() => {
-    console.log(tetromino);
+    console.log(tetrominoRef.current);
     setGrid(BuildTetrisGrid());
     setReset();
     setResetButtonDisabled(true);
   }, [reset]);
 
   const startButtonClickedHandler = () => {
-    const tetromino = GetRandomTetromino();
-    DrawTetromino(tetromino, grid);
+    tetrominoRef.current = GetRandomTetromino();
+    DrawTetromino(tetrominoRef.current, grid);
     setGrid([...grid]);
-    setTetromino(tetromino);
+    //setTetromino(tetrominoRef.current);
     setStartButtonDisabled(true);
     setResetButtonDisabled(false);
     setIsGameStarted(true);
@@ -50,10 +51,11 @@ const Tetris = () => {
   useEffect(() => {
     if (isGameStarted) {
       const interval = setInterval(() => {
-        tetromino.y += 1;
-        DrawTetromino(tetromino, grid);
-        setTetromino({ ...tetromino });
-        console.log(tetromino);
+        tetrominoRef.current.y += 1;
+        DrawTetromino(tetrominoRef.current, grid);
+        //setTetromino(tetrominoRef.current);
+        setGrid([...grid]);
+        console.log(tetrominoRef.current);
       }, 1000);
 
       return () => clearInterval(interval);
@@ -65,7 +67,7 @@ const Tetris = () => {
     setIsGameStarted(false);
     setStartButtonDisabled(false);
     setResetButtonDisabled(true);
-    setTetromino({ ...tetromino });
+    //setTetromino(tetrominoRef.current);
     setGrid([...grid]);
     // fix bug where not resetting 2nd time around
   };
@@ -82,24 +84,21 @@ const Tetris = () => {
   const MoveTetromino = ({ keyCode }) => {
     if (isGameStarted) {
       if (keyCode === 37) {
-        tetromino.x -= 1;
-        DrawTetromino(tetromino, grid);
-        setTetromino({ ...tetromino });
-        setGrid([...grid]);
+        tetrominoRef.current.x -= 1;
       } else if (keyCode === 38) {
         // rotate tetromino
         alert('up');
       } else if (keyCode === 39) {
-        // tetromino.x += 1;
-        // DrawTetromino(tetromino, grid);
-        // setTetromino({ ...tetromino });
-        // setGrid([...grid]);
+        tetrominoRef.current.x += 1;
       } else if (keyCode === 40) {
         // move tetromino down
         alert('down');
       } else if (keyCode === 32) {
         // spacebar moves tetromino to bottom immediately
       }
+      DrawTetromino(tetrominoRef.current, grid);
+      //setTetromino(tetrominoRef.current);
+      setGrid([...grid]);
     }
   };
 
