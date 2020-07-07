@@ -94,12 +94,12 @@ export const Reset = styled.button`
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  background-color: #fe4a49;
+  background-color: ${props => props.disabled ? 'gray' : '#fe4a49'};
   font-weight: bold;
   outline: none;
   grid-row: 2/3;
 
   &:hover {
-    background-color: #df0101;
+    background-color: ${props => props.disabled ? 'gray' : '#df0101'};
   }
 `;

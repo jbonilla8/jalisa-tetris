@@ -1,9 +1,8 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BuildTetrisGrid,
   GetRandomTetromino,
-  DrawTetromino,
-  MoveTetromino
+  DrawTetromino
 } from './Utils/GameUtils';
 import Block from './Block';
 
@@ -26,20 +25,25 @@ import {
 const Tetris = () => {
   const [grid, setGrid] = useState([]);
   const [tetromino, setTetromino] = useState(null);
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [startButtonDisabled, setStartButtonDisabled] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
+  const [resetButtonDisabled, setResetButtonDisabled] = useState(false);
+  const [reset, setReset] = useState(false);
 
   useEffect(() => {
     console.log(tetromino);
     setGrid(BuildTetrisGrid());
-  }, []);
+    setReset();
+    setResetButtonDisabled(true);
+  }, [reset]);
 
   const startButtonClickedHandler = () => {
     const tetromino = GetRandomTetromino();
     DrawTetromino(tetromino, grid);
     setGrid([...grid]);
     setTetromino(tetromino);
-    setButtonDisabled(true);
+    setStartButtonDisabled(true);
+    setResetButtonDisabled(false);
     setIsGameStarted(true);
   };
 
@@ -57,7 +61,13 @@ const Tetris = () => {
   }, [isGameStarted]);
 
   const resetButtonClickedHandler = () => {
-    setTetromino(null);
+    setReset(true);
+    setIsGameStarted(false);
+    setStartButtonDisabled(false);
+    setResetButtonDisabled(true);
+    setTetromino({ ...tetromino });
+    setGrid([...grid]);
+    // fix bug where not resetting 2nd time around
   };
 
   const styledGrid = [];
@@ -69,9 +79,33 @@ const Tetris = () => {
     }
   }
 
-  console.log(grid);
+  const MoveTetromino = ({ keyCode }) => {
+    if (isGameStarted) {
+      if (keyCode === 37) {
+        tetromino.x -= 1;
+        DrawTetromino(tetromino, grid);
+        setTetromino({ ...tetromino });
+        setGrid([...grid]);
+      } else if (keyCode === 38) {
+        // rotate tetromino
+        alert('up');
+      } else if (keyCode === 39) {
+        // tetromino.x += 1;
+        // DrawTetromino(tetromino, grid);
+        // setTetromino({ ...tetromino });
+        // setGrid([...grid]);
+      } else if (keyCode === 40) {
+        // move tetromino down
+        alert('down');
+      } else if (keyCode === 32) {
+        // spacebar moves tetromino to bottom immediately
+      }
+    }
+  };
 
+  console.log(grid);
   console.log(styledGrid);
+
   return (
     <TetrisWrapper role="button" tabIndex="0" onKeyDown={e => MoveTetromino(e)}>
       <LeftPanel>
@@ -84,10 +118,18 @@ const Tetris = () => {
         <Level>Level</Level>
         <Score>Score</Score>
         <ButtonsContainer>
-          <Start onClick={startButtonClickedHandler} disabled={buttonDisabled}>
+          <Start
+            onClick={startButtonClickedHandler}
+            disabled={startButtonDisabled}
+          >
             Start
           </Start>
-          <Reset onClick={resetButtonClickedHandler}>Reset</Reset>
+          <Reset
+            onClick={resetButtonClickedHandler}
+            disabled={resetButtonDisabled}
+          >
+            Reset
+          </Reset>
         </ButtonsContainer>
       </RightPanel>
     </TetrisWrapper>

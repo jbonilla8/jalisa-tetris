@@ -15,22 +15,6 @@ export const BuildTetrisGrid = () => {
   return blocks;
 };
 
-export const MoveTetromino = ({ keyCode }) => {
-  if (keyCode === 37) {
-    // move tetromino left
-    alert('left');
-  } else if (keyCode === 38) {
-    // rotate tetromino
-    alert('up');
-  } else if (keyCode === 39) {
-    // move tetromino right
-    alert('right');
-  } else if (keyCode === 40) {
-    // move tetromino down
-    alert('down');
-  }
-};
-
 export const GetRandomTetromino = () => {
   const tetromino = 'IJLOSTZ';
   const randTetromino = tetromino[Math.floor(Math.random() * tetromino.length)];
