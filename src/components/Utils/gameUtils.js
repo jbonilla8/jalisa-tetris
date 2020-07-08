@@ -49,17 +49,22 @@ export const DrawTetromino = (tetromino, grid) => {
   }
 };
 
-export const RotateClockwise = (tetromino) => {
+export const RotateClockwise = tetromino => {
   const { shape } = tetromino;
   for (let y = 0; y < shape.length; y++) {
     for (let x = 0; x < y; x++) {
-      [shape[x][y], shape[y][x]] = [shape[y][x], shape[x][y]];
+      [shape[x][y], shape[y][x]] = [shape[y][x], shape[x][y]]; // flip the matrix
     }
   }
-  shape.forEach(row => row.reverse());
+  shape.forEach(row => row.reverse()); // reverse the matrix
 };
 
-export const RotateCounterClockwise = (tetromino) => {
+export const RotateCounterClockwise = tetromino => {
   const { shape } = tetromino;
-  
+  shape.forEach(row => row.reverse()); // reverse the matrix
+  for (let y = 0; y < shape.length; y++) {
+    for (let x = 0; x < y; x++) {
+      [shape[x][y], shape[y][x]] = [shape[y][x], shape[x][y]]; // flip the matrix
+    }
+  }
 };
