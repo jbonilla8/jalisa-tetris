@@ -5,7 +5,7 @@ import {
   DrawTetromino,
   RotateClockwise,
   RotateCounterClockwise
-} from './Utils/GameUtils';
+} from './Utils/gameUtils';
 import Block from './Block';
 
 // Styled components
@@ -84,9 +84,9 @@ const Tetris = () => {
       if (keyCode === 37) {
         tetrominoRef.current.x -= 1;
       } else if (keyCode === 38 || keyCode === 88) {
-        RotateClockwise(tetrominoRef.current, grid);
+        RotateClockwise(tetrominoRef.current);
       } else if (keyCode === 18 || keyCode === 90) {
-        RotateCounterClockwise(tetrominoRef.current, grid);
+        RotateCounterClockwise(tetrominoRef.current);
       } else if (keyCode === 39) {
         tetrominoRef.current.x += 1;
       } else if (keyCode === 40) {
