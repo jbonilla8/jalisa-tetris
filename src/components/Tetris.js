@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   BuildTetrisGrid,
   GetRandomTetromino,
-  DrawTetromino
+  DrawTetromino,
+  RotateClockwise,
+  RotateCounterClockwise
 } from './Utils/GameUtils';
 import Block from './Block';
 
@@ -77,16 +79,14 @@ const Tetris = () => {
     }
   }
 
-  const RotateTetromino = tetrominoRef => {};
-
   const MoveTetromino = ({ keyCode }) => {
     if (isGameStarted) {
       if (keyCode === 37) {
         tetrominoRef.current.x -= 1;
       } else if (keyCode === 38 || keyCode === 88) {
-        alert('rotate clockwise');
+        RotateClockwise(tetrominoRef.current, grid);
       } else if (keyCode === 18 || keyCode === 90) {
-        alert('rotate counter-clockwise');
+        RotateCounterClockwise(tetrominoRef.current, grid);
       } else if (keyCode === 39) {
         tetrominoRef.current.x += 1;
       } else if (keyCode === 40) {

@@ -48,3 +48,18 @@ export const DrawTetromino = (tetromino, grid) => {
     }
   }
 };
+
+export const RotateClockwise = (tetromino, grid) => {
+  const { shape, blockColor } = tetromino;
+  for (let y = 0; y < shape.length; y++) {
+    for (let x = 0; x < y; x++) {
+      [shape[x][y], shape[y][x]] = [shape[y][x], shape[x][y]];
+    }
+  }
+  shape.forEach(row => row.reverse());
+};
+
+export const RotateCounterClockwise = (tetromino, grid) => {
+  const { shape, blockColor } = tetromino;
+  
+};
