@@ -4,7 +4,10 @@ import {
   GetRandomTetromino,
   DrawTetromino,
   RotateClockwise,
-  RotateCounterClockwise
+  RotateCounterClockwise,
+  GetTetrominoHeight,
+  GetTetrominoOffsets,
+  IsPointWithinGrid
 } from './Utils/gameUtils';
 import Block from './Block';
 
@@ -31,9 +34,10 @@ const Tetris = () => {
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [resetButtonDisabled, setResetButtonDisabled] = useState(false);
   const [reset, setReset] = useState(false);
+  const [collided, setCollided] = useState(false);
 
   useEffect(() => {
-    console.log(tetrominoRef.current);
+    console.log('CURRENT TETROMINO', tetrominoRef.current);
     setGrid(BuildTetrisGrid());
     setReset();
     setResetButtonDisabled(true);
@@ -51,15 +55,69 @@ const Tetris = () => {
   useEffect(() => {
     if (isGameStarted) {
       const interval = setInterval(() => {
-        tetrominoRef.current.y += 1;
+        const tetromino = tetrominoRef.current;
+        const { shape, blockColor } = tetromino;
+
+        let collisionDetected = false;
+
+        for (let x = 0; x < shape.length; x++) {
+          for (let y = 0; y < shape[0].length; y++) {
+
+            const gridX = x + tetromino.x;
+            const gridY = y + tetromino.y;
+
+            if (IsPointWithinGrid(gridX, gridY, grid) &&
+              IsPointWithinGrid(gridX, gridY + 1, grid)) {
+
+              const block = grid[gridX][gridY];
+              const blockBelow = grid[gridX][gridY + 1];
+
+              if (
+                blockBelow.blockColor !== null &&
+                !blockBelow.isPartOfCurrentTetromino &&
+                block.blockColor !== null
+              ) {
+                collisionDetected = true;
+              }
+            }
+          }
+        }
+
+        if (!collisionDetected) {
+          tetrominoRef.current.y += 1;
+        } else {
+          tetrominoRef.current = GetRandomTetromino();
+          for (let y = 0; y < grid[0].length; y++) {
+            for (let x = 0; x < grid.length; x++) {
+              const blockToStyle = grid[x][y];
+              blockToStyle.isPartOfCurrentTetromino = false;
+            }
+          }
+        }
+
+        // const topOfTetromino = tetrominoRef.current.y;
+        // const tetrominoHeight = GetTetrominoHeight(tetrominoRef.current);
+        // const bottomOfTetromino = topOfTetromino + tetrominoHeight;
+        // if (bottomOfTetromino >= grid[0].length - os) {
+        //   setCollided(true);
+        // } else {
+        //   DrawTetromino(tetrominoRef.current, grid);
+        //   console.log('CURRENT TETROMINO', tetrominoRef.current);
+        // }
+
         DrawTetromino(tetrominoRef.current, grid);
+
         setGrid([...grid]);
-        console.log(tetrominoRef.current);
+        console.log(
+          'TETROMINO HEIGHT',
+          GetTetrominoHeight(tetrominoRef.current)
+        );
+        console.log('OFFSETS', GetTetrominoOffsets(tetrominoRef.current));
       }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [isGameStarted]);
+  }, [isGameStarted, collided]);
 
   const resetButtonClickedHandler = () => {
     setReset(true);
