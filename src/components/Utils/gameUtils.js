@@ -9,9 +9,9 @@ export const BuildTetrisGrid = () => {
     const col = [];
     for (let y = 0; y < gridHeight; y++) {
       let blockColor = null;
-      if (x == 4 && y > 10) {
-        blockColor = 'green';
-      }
+      // if (x == 4 && y > 10) {
+      //   blockColor = 'green';
+      // }
       col.push({ x, y, blockColor: blockColor });
     }
     blocks.push(col);
@@ -95,8 +95,6 @@ export const GetTetrominoOffsets = tetromino => {
   const { shape } = tetromino;
 
   let offsets = {
-    top: 0,
-    bottom: 0,
     left: 0,
     right: 0
   };
@@ -105,9 +103,9 @@ export const GetTetrominoOffsets = tetromino => {
   let beforeHeightEncountered = true;
   let afterHeightFound = false;
 
-  for (let x = 0; x < shape.length; x++) {
+  for (let y = 0; y < shape[0].length; y++) {
     let columnWasEmpty = true;
-    for (let y = 0; y < shape[0].length; y++) {
+    for (let x = 0; x < shape.length; x++) {
       const occupiedRow = shape[x][y] > 0;
       if (occupiedRow) {
         height += 1;
@@ -157,3 +155,83 @@ export const RotateCounterClockwise = tetromino => {
   }
   tetromino.shape = newArray;
 };
+
+export const CheckForCollision = (tetrominoRef, grid, setGrid) => {
+  const tetromino = tetrominoRef.current;
+  const { shape, blockColor } = tetromino;
+
+  let collisionDetected = false;
+
+  for (let x = 0; x < shape.length; x++) {
+    for (let y = 0; y < shape[0].length; y++) {
+
+      const gridX = x + tetromino.x;
+      const gridY = y + tetromino.y;
+
+      if (IsPointWithinGrid(gridX, gridY, grid)) {
+        const block = grid[gridX][gridY];
+        if (block.blockColor !== null &&
+          block.isPartOfCurrentTetromino) {
+          if (IsPointWithinGrid(gridX, gridY + 1, grid)) {
+            const blockBelow = grid[gridX][gridY + 1];
+
+            if (
+              blockBelow.blockColor !== null &&
+              !blockBelow.isPartOfCurrentTetromino
+            ) {
+              collisionDetected = true;
+            }
+          } else {
+            collisionDetected = true;
+          }
+        }
+      }
+    }
+  }
+
+  if (collisionDetected) {
+    tetrominoRef.current = GetRandomTetromino();
+    for (let y = 0; y < grid[0].length; y++) {
+      for (let x = 0; x < grid.length; x++) {
+        const blockToStyle = grid[x][y];
+        blockToStyle.isPartOfCurrentTetromino = false;
+      }
+    }
+
+    for (let y = 0; y < grid[0].length; y++) {
+      // check for completely colored rows
+      let isRowClearable = true;
+
+      for (let x = 0; x < grid.length; x++) {
+        const block = grid[x][y];
+
+        if (block.blockColor === null) {
+          isRowClearable = false;
+        }
+      }
+
+      if (isRowClearable) {
+        // delete those rows
+        for (let x = 0; x < grid.length; x++) {
+          const block = grid[x][y];
+          block.blockColor = null;
+        }
+
+        // shift everything above cleared rows down
+        for (let yAbove = y; yAbove > 0; yAbove--) {
+          for (let x = 0; x < grid.length; x++) { 
+            const block = grid[x][yAbove];
+            const blockAbove = grid[x][yAbove - 1];
+            block.blockColor = blockAbove.blockColor;
+          }
+        }
+        // increase the score
+        // add flashy flashy
+      }
+    }
+
+  }
+
+  return collisionDetected;
+}
+
