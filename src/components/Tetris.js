@@ -126,14 +126,14 @@ const Tetris = () => {
   return (
     <TetrisWrapper>
       <LeftPanel>
-        <Held>Held</Held>
+        {/* <Held>Held</Held>
         <Next>Next</Next>
-        <Time>Time</Time>
+        <Time>Time</Time> */}
       </LeftPanel>
       <TetrisGrid>{styledGrid}</TetrisGrid>
       <RightPanel>
-        <Level>Level</Level>
-        <Score>Score</Score>
+        {/* <Level>Level</Level>
+        <Score>Score</Score> */}
         <ButtonsContainer>
           <Start
             onClick={startButtonClickedHandler}
