@@ -15,8 +15,8 @@ export const TetrisWrapper = styled.div`
 
 export const TetrisGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(10, 40px);
-  grid-template-rows: repeat(20, 40px);
+  grid-template-columns: repeat(10, 5vh);
+  grid-template-rows: repeat(20, 5vh);
 `;
 
 export const LeftPanel = styled.div`
@@ -24,7 +24,7 @@ export const LeftPanel = styled.div`
   grid-template-columns: auto;
   grid-template-rows: repeat(3, 33.33%);
   background-color: rgba(59, 60, 84, 0.8);
-  width: 210px;
+  width: 18%;
   height: 100vh;
   justify-items: center;
   align-items: center;
@@ -48,7 +48,7 @@ export const RightPanel = styled.div`
   grid-template-columns: auto;
   grid-template-rows: repeat(3, 33.33%);
   background-color: rgba(59, 60, 84, 0.8);
-  width: 210px;
+  width: 18%;
   height: 100vh;
   justify-items: center;
   align-items: center;
