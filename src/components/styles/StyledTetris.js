@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Galaxy from '../../images/galaxy-min.jpg';
+import Galaxy from '../../images/galaxy.jpg';
 
 export const TetrisWrapper = styled.div`
   display: flex;
